@@ -79,9 +79,63 @@
 
         <plugins>
             <plugin>
-                <groupId>org.noear</groupId>
-                <artifactId>solon-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <finalName>${project.artifactId}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.example.demo.App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
+
+<!--            <plugin>-->
+<!--                <groupId>io.fabric8</groupId>-->
+<!--                <artifactId>docker-maven-plugin</artifactId>-->
+<!--                <version>0.39.1</version>-->
+<!--                <configuration>-->
+<!--                    <images>-->
+<!--                        <image>-->
+<!--                            <name>${project.artifactId}:latest</name>-->
+<!--                            <build>-->
+<!--                                <from>docker.planning.com/docker.io/eclipse-temurin:8-jdk</from>-->
+<!--                                <entryPoint>-->
+<!--                                    <arg>java</arg>-->
+<!--                                    <arg>-jar</arg>-->
+<!--                                    <arg>/${project.build.finalName}.jar</arg>-->
+<!--                                    <arg>&#45;&#45;server.port=8080</arg>-->
+<!--                                    <arg>&#45;&#45;drift=1</arg>-->
+<!--                                </entryPoint>-->
+<!--                                <assembly>-->
+<!--                                    <inline>-->
+<!--                                        <files>-->
+<!--                                            <file>-->
+<!--                                                <source>${project.build.directory}/${project.build.finalName}.jar</source>-->
+<!--                                                <destName>${project.build.finalName}.jar</destName>-->
+<!--                                            </file>-->
+<!--                                        </files>-->
+<!--                                    </inline>-->
+<!--                                </assembly>-->
+<!--                            </build>-->
+<!--                        </image>-->
+<!--                    </images>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
     

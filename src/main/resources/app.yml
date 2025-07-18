@@ -1,4 +1,9 @@
-server.port: 8080
+server:
+  port: 8080
+  http:
+    coreThreads: 4
+    maxThreads: 32
+
 
 solon.app:
   name: 'demo-app'
